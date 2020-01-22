@@ -1,32 +1,41 @@
-//http is our core module
-// const http=require('http');
 
-//Third party module
-const express=require('express');
+// const express = require('express');
+// const app = express();
 
-//CREATING AN EXPRESS APPLN BY EXPORTING "CONST EXPRESS" AS A FUNCTION
-const app=express();
+// const adminRoute=require('./routes/admin.js');
+// const shopRoute=require('./routes/shops.js');
 
+// app.use(adminRoute);
+// app.use(shopRoute);
 
-//use is used to add a middeleware to our server
-//req and res are the objects
-//next is a function used to pass a request to next middleware
-app.use((req,res,next)=>{
-  console.log(' First Middleware');
-//   next();
-});
-//res.send is used to send the response
-app.use((req,res,next)=>{
-  console.log('Another middleware');
-  res.send('<html><h1>RESPONSE DONE</h1></html>');
-});
+// app.use((req,res,next)=>{
+// res.send('<h4>404 NOT FOUND</h4>');
+// });
+// app.listen(3000);
+const express = require('express');
+const path=require('path');
+const app = express();
+const rootDir=require('./util/path');
 
-
-//creating a server
-// const server=http.createServer(app);
+const adminController = require('./routes/admin.js');
+const shopController = require('./routes/shops.js');
 
 
-// server.listen(4000);
- 
-//creates the server implicitly
-app.listen(4000);
+app.use('/admin',adminController);
+app.use(shopController);
+
+
+app.use(express.static(path.join(rootDir,'public')));
+
+app.use((req, res, next) => {
+  // res.send('<h1>404</h1>');
+  // res.sendFile('../404.html');
+  // res.sendFile(path.join(__dirname,'views','404.html'));
+   res.sendFile(path.join(rootDir,'views','404.html'));
+   
+
+
+})
+
+app.listen(5000);
+

@@ -6,20 +6,20 @@ const route=express();
 
 //exports- exports the each module
 
-exports.notFound=route.use('/^',(req,res,next)=>{
-  res.send('<h1>ERROR 404 NOT FOUND</h1>');
+// exports.notFound=route.use('^/',(req,res,next)=>{
+//   res.send('<h1>ERROR 404 NOT FOUND</h1>');
+// });
+exports.addProduct = route.get('admin/add-product',(req,res,next)=>{
+ res.send('<html><body><form action="admin/add-product" method="POST"><input type="text" name="add"/><button>ADD PRODUCT</button></form></body></html>');
 });
-exports.addProduct = route.get('/addproduct',(req,res,next)=>{
- res.send('<html><body><form action="/addproduct" method="POST"><input type="text" name="add"/><button>ADD PRODUCT</button></form></body></html>');
-});
-exports.Product=route.post('/addproduct',(req,res,next)=>{
+exports.Product=route.post('admin/add-product',(req,res,next)=>{
 
 console.log(req.body);
-    res.redirect('/a');
+    res.redirect('/');
 });
 
 
-exports.result=route.use('/a',(req,res,next)=>{
+exports.result=route.use('/',(req,res,next)=>{
   res.send('MYY APP');
 });
 
