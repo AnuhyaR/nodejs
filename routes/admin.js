@@ -8,11 +8,11 @@ const router = express.Router();
 
 const products=[];
 
-
+const pathname='/admin/add-product';
 // /admin/add-product => GET
 router.get('/add-product', (req, res, next) => {
   // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-  res.render('add-product',{pagetitle:"ADD Product",path:'/admin/add-product'});
+  res.render('add-product',{pagetitle:"ADD Product",path:'/admin/add-product',productCSS:true,formCSS:true,addproduct:true});
 });
 
 // /admin/add-product => POST
@@ -21,6 +21,6 @@ router.post('/add-product', (req, res, next) => {
   console.log(req.body);
   res.redirect('/');
 });
-
+                                                                   
 module.exports.router = router;
 module.exports.productArr=products;

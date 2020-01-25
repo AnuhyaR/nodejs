@@ -2,13 +2,23 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const expressHbs=require('express-handlebars')
 
 const app = express();
 
 //app.set is used to set the  template engine or user views ie. html pages here its is pug
-app.set('view engine','pug');
 
+//registering the express handlebars
+//engine is a method which will tell to register  our template engine which we arte providing
+//handlebars-handlebars is the name given to template engine
+//expressHbs-is a constant which have all th libraries of the express-handlebars
+// app.engine('handlebars',expressHbs);
+app.engine('hbs',expressHbs({extname:'hbs',layoutsDir:'views/layouts','defaultLayout':'mainContent'}));
 
+//used to set the template engine
+app.set('view engine','hbs');
+
+//looking into the files to be extracted
 app.set('views','views');
 
 const adminData = require('./routes/admin');
@@ -26,4 +36,4 @@ app.use((req, res, next) => {
     res.render("404",{pagetitle:"404"});
 });
 
-app.listen(3000);
+app.listen(3500);
