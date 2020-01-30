@@ -14,8 +14,8 @@ exports.postAddProduct=(req,res,next)=>{
 }
 exports.getProducts=(req,res,next)=>{
 
-    const products=Product.fetchAll();
+    Product.fetchAll(products=>{
     console.log('shop.js');
   
   res.render('shop',{prods:products,pagetitle:"shop",path:'/',hasproduct:products.length>0,productCSS:true,shopproduct:true});
-}
+});}
